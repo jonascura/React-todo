@@ -6,7 +6,7 @@ import { PlusIcon, TableCellsIcon } from '@heroicons/react/24/solid'
 
 
 
-export const CustomForm = ( {addTask} ) => {
+export const CustomForm = ({ addTask }) => {
   const [task, setTask] = useState("")
 
   const handleFormSubmit = (e) => {
