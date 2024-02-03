@@ -1,12 +1,15 @@
 import { useState } from 'react'
 
+// customHooks
+import useLocalStorage from './hooks/useLocalStorage'
+
 // custom componets
 import CustomForm from './components/CustomForm'
 import TaskList  from './components/TaskList';
 import EditForm from './components/EditForm';
 
 function App() {
-  const [ tasks, setTasks ] = useState([]);
+  const [ tasks, setTasks ] = useLocalStorage('react-todo.tasks', []);
   const [ previousFocusEl, setPreviousFocusEl ] = useState(null);
   const [ editedTask, setEditedTask ] = useState(null);
   const [ isEditing, setIsEditiing ] = useState(false);
@@ -49,7 +52,6 @@ function App() {
     // previous state focus
     previousFocusEl.focus();
   }
-
 
 
   return (
