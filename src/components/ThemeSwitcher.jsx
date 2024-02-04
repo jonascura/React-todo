@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 
+// customHooks
+import useLocalStorage from '../hooks/useLocalStorage'
+
 // styles
 import styles from './ThemeSwitcher.module.css'
 
@@ -9,8 +12,11 @@ import { XMarkIcon, SunIcon, MoonIcon, SwatchIcon } from '@heroicons/react/24/ou
 import { useEffect } from 'react';
 
 const ThemeSwitcher = () => {
+  // If want to save hue settings through multiple sessions
+  // const [hue, setHue] = useLocalStorage('react-todo.color', '240')
   const [ hue, setHue ] = useState('240')
-  const [ theme, setTheme ] = useState('light');
+  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const [theme, setTheme] = useLocalStorage('react-todo.theme', defaultDark ? "dark" : "light" )
   const [ isColorPicking, setIsColorPicking ] = useState(false);
 
   useEffect(() => {
@@ -24,6 +30,11 @@ const ThemeSwitcher = () => {
   return (
     <aside
       className={styles.wrapper}
+      style={{
+        backgroundColor: isColorPicking
+        ? 'hsl(var(--muted) / .6)'
+        : 'transparent'
+      }}
       //  style
     >
       {
